@@ -61,10 +61,29 @@ app.get('/getTasks', function(req, res){
 		});//end connect
 	});//end post
 
-	app.delete('/deleteTask', urlencodedParser, function (req, res){
+	app.post('/completeTask/:id', urlencodedParser, function (req, res){
+		console.log('in comlete task post');
+		var id = req.params.id;
+    // ALTER TABLE "public"."tasks" ALTER COLUMN "completed" SET DEFAULT 'true';
+
+		pg.connect(connectionString, function(err, client, done){
+			if(err){
+				console.log(err);
+			} else{
+				client.query('ALTER TABLE tasks ALTER COLUMN (completed) SET DEFAULT "true" WHERE task_id = ($1) ',
+											[id],
+										done());
+			}
+
+		});//end connectionString
+
+	});//end app.post
+
+	app.delete('/deleteTask/:id', urlencodedParser, function (req, res){
+		console.log(req.params.id);
 		console.log('in app.delete function');
-		var id = req.body.id;
-		console.log('id is ', id);
+		var id = req.params.id;
+
 		pg.connect(connectionString, function(err, client, done){
 			if (err){
 				console.log(err);

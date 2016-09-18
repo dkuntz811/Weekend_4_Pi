@@ -13,7 +13,8 @@ $(document).ready(function(){
 		console.log(objectToSend);
 		saveTask(objectToSend);
 	});//end addButton click
-    $('#viewTasks').on('click', '#delete', deleteTask);
+    $('#viewTasks').on('click', '.delete', deleteTask);
+		$('#viewTasks').on('click', '.complete', completeTask);
 });//end document ready
 
 var getTasks = function (){
@@ -29,8 +30,8 @@ var getTasks = function (){
 			outputDiv.append('<ul>');
 			for (var i = 0; i <data.length; i++){
 				outputDiv.append('<li id = "taskList">' + data[i].task + '</li>');
-				outputDiv.append('<em><button id = "complete">Complete</button></em>')
-				outputDiv.append('<em><button id = "delete">Delete</button></em>')
+				outputDiv.append('<em><button class = "complete" id = "'+ data[i].task_id + '">Complete</button></em>')
+				outputDiv.append('<em><button class = "delete" id = "' + data[i].task_id + '">Delete</button></em>')
 			}
 
 		}//end success
@@ -51,25 +52,44 @@ var getTasks = function (){
 			getTasks();
 	};//end saveTask function
 
-function deleteTask (){
-	console.log('delete button hit');
-	var id = $(this).parent().parent().data('id');
-	// var taskID = $(this).parent().parent().data('taskID');
-	console.log('this is', this);
 
+// function completeTask (){
+// 	console.log('complete button hit');
+// 	var id = this.getAttribute('id');
+//
+// 	console.log('this is', this.getAttribute('id'));
+// 	$.ajax({
+// 		type: 'POST',
+// 		url: '/completeTask/' + id,
+// 		success: function(){
+// 			console.log('complete task successful');
+// 			$(this).parent().css("background-color", "tan");
+// 			$(this).parent().css("text-decoration", "line-through");
+// 		},
+// 		error: function(){
+// 			console.log('post failed');
+// 		}
+// 	});//end ajax post
+// 	getTasks();
+// }//end ajax post
+
+function deleteTask (){
+
+	console.log('delete button hit');
+	var id = this.getAttribute('id');
+	// var taskID = $(this).parent().parent().data('taskID');
+	console.log('this is', this.getAttribute('id'));
 	$.ajax({
 		type: 'DELETE',
-		url: '/deleteTask' + id,
-
+		url: '/deleteTask/' + id,
 		success: function(){
 			console.log('delete successful');
 			$(this).parent().parent().remove();
 			$('#viewTasks').empty();
-      getTasks();
 		},
 		error: function(){
 			console.log('delete failed');
 		}
-
 	});//end Ajax delete
+	getTasks();
 };//end deleteTask function

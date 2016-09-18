@@ -29,7 +29,7 @@ var getTasks = function (){
 			outputDiv.empty();
 			outputDiv.append('<ul>');
 			for (var i = 0; i <data.length; i++){
-				outputDiv.append('<li id = "taskList">' + data[i].task + '</li>');
+				outputDiv.append('<li class="list" id = "taskList">' + data[i].task + '</li>');
 				outputDiv.append('<em><button class = "complete" id = "'+ data[i].task_id + '">Complete</button></em>')
 				outputDiv.append('<em><button class = "delete" id = "' + data[i].task_id + '">Delete</button></em>')
 			}
@@ -53,25 +53,25 @@ var getTasks = function (){
 	};//end saveTask function
 
 
-// function completeTask (){
-// 	console.log('complete button hit');
-// 	var id = this.getAttribute('id');
-//
-// 	console.log('this is', this.getAttribute('id'));
-// 	$.ajax({
-// 		type: 'POST',
-// 		url: '/completeTask/' + id,
-// 		success: function(){
-// 			console.log('complete task successful');
-// 			$(this).parent().css("background-color", "tan");
-// 			$(this).parent().css("text-decoration", "line-through");
-// 		},
-// 		error: function(){
-// 			console.log('post failed');
-// 		}
-// 	});//end ajax post
-// 	getTasks();
-// }//end ajax post
+function completeTask (){
+	console.log('complete button hit');
+	var id = this.getAttribute('id');
+
+	console.log('this is', this.getAttribute('id'));
+	$.ajax({
+		type: 'POST',
+		url: '/completeTask/' + id,
+		success: function(){
+			console.log('complete task successful');
+			$(this).parent().css("background-color", "tan");
+			$(this).parent().css("text-decoration", "line-through");
+		},
+		error: function(){
+			console.log('post failed');
+		}
+	});//end ajax post
+
+}//end ajax post
 
 function deleteTask (){
 

@@ -5,18 +5,18 @@
 	<title>My Pi To Do List</title>
 	<script src="vendors/jquery-3.0.0.min.js" charset="utf-8"></script>
   <script src="scripts/client.js" charset="utf-8"></script>
-	<link type="stylesheet" src="styles/stylesheet.css">
+	<link rel="stylesheet" type="text/css" href="styles/stylesheet.css">
 </head>
 <body>
 	<header class = "header">My Pi To Do List</header>
-    <div id ="addTask">
+    <div class = "addTask" id ="addTask">
 	 <h2 class = "toDo">Add Task to To Do List:</h2>
-	 <input type = "text" id = "taskIn" value="" placeholder = "task">
-	 <button type = "button" id = "addButton">Add Task</button>
+	 <input class = "taskIn" type = "text" id = "taskIn" value="" placeholder = "get this done...">
+	 <button class = "addButton" type = "button" id = "addButton">Add Task</button>
 	</div>
 	<h2>Current To Do List:</h2>
-	<div id = "viewTasks">
-
+	<div class="viewTaskts" id = "viewTasks">
+    <section class="list"></section>
 	</div>
 </body>
 </html>

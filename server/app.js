@@ -32,7 +32,7 @@ app.get('/getTasks', function(req, res){
 			//array to hold our results
 			var resultArray = [];
 			//query call to db table
-			var queryResults = client.query('SELECT * FROM tasks');
+			var queryResults = client.query('SELECT * FROM tasks ');
 			queryResults.on('row', function(row){
 				resultArray.push(row);
 				console.log(resultArray);
@@ -65,18 +65,18 @@ app.get('/getTasks', function(req, res){
 		console.log('in comlete task post');
 		var id = req.params.id;
     // ALTER TABLE "public"."tasks" ALTER COLUMN "completed" SET DEFAULT 'true';
-
+  	console.log('id is', id);
 		pg.connect(connectionString, function(err, client, done){
 			if(err){
 				console.log(err);
 			} else{
+
 				client.query('ALTER TABLE tasks ALTER COLUMN (completed) SET DEFAULT "true" WHERE task_id = ($1) ',
 											[id],
 										done());
 			}
 
 		});//end connectionString
-
 	});//end app.post
 
 	app.delete('/deleteTask/:id', urlencodedParser, function (req, res){

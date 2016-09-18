@@ -71,7 +71,7 @@ app.get('/getTasks', function(req, res){
 				console.log(err);
 			} else{
 
-				client.query('ALTER TABLE tasks ALTER COLUMN (completed) SET DEFAULT "true" WHERE task_id = ($1) ',
+				client.query('UPDATE tasks SET completed = true WHERE task_id = ($1) ',
 											[id],
 										done());
 			}

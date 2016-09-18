@@ -1,0 +1,14 @@
+body {
+	font-family: "fantasy copperplate", Garamond, sans-serif;
+}
+
+header {
+	height: 100px;
+	font-size: 50px;
+	text-align: center;
+	padding-top: 15px;
+}
+
+#addTask {
+	align-items: center;
+}

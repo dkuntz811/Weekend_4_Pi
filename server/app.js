@@ -74,6 +74,7 @@ app.get('/getTasks', function(req, res){
 				client.query('UPDATE tasks SET completed = true WHERE task_id = ($1) ',
 											[id],
 										done());
+										console.log('completed changed to true');
 			}
 
 		});//end connectionString

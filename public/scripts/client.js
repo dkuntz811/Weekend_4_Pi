@@ -5,6 +5,8 @@ $(document).ready(function(){
 	getTasks();
    //add task button click
 	$('#addButton').on('click', function(){
+		//clear input field.
+		//  $('input[type="text"]').val('');
 		console.log('in Addbutton on click')
     //get user input for new task;
 		var objectToSend = {
@@ -32,6 +34,8 @@ var getTasks = function (){
 				outputDiv.append('<li class="list" id = "taskList">' + data[i].task + '</li>');
 				outputDiv.append('<em><button class = "complete" id = "'+ data[i].task_id + '">Complete</button></em>')
 				outputDiv.append('<em><button class = "delete" id = "' + data[i].task_id + '">Delete</button></em>')
+
+
 			}
 
 		}//end success
@@ -39,7 +43,7 @@ var getTasks = function (){
 }//end getTasks function
 
 	var saveTask = function(newTask){
-		console.log('in saveTask', saveTask);
+
 		//ajax call to server to send tasks
 		$.ajax({
 			url: '/addTask',
@@ -63,18 +67,18 @@ function completeTask (){
 		url: '/completeTask/' + id,
 		success: function(){
 			console.log('complete task successful');
-			$(this).parent().css("background-color", "tan");
-			$(this).parent().css("text-decoration", "line-through");
+
+
 		},
 		error: function(){
 			console.log('post failed');
 		}
 	});//end ajax post
-
+    getTasks();
 }//end ajax post
 
 function deleteTask (){
-
+	if(confirm('Are you sure you want to delete this task?')){
 	console.log('delete button hit');
 	var id = this.getAttribute('id');
 	// var taskID = $(this).parent().parent().data('taskID');
@@ -83,7 +87,6 @@ function deleteTask (){
 		type: 'DELETE',
 		url: '/deleteTask/' + id,
 		success: function(){
-			console.log('delete successful');
 			$(this).parent().parent().remove();
 			$('#viewTasks').empty();
 		},
@@ -91,5 +94,6 @@ function deleteTask (){
 			console.log('delete failed');
 		}
 	});//end Ajax delete
+}
 	getTasks();
 };//end deleteTask function

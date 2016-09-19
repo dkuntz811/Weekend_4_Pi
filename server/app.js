@@ -61,7 +61,7 @@ app.get('/getTasks', function(req, res){
 		});//end connect
 	});//end post
 
-	app.post('/completeTask/:id', urlencodedParser, function (req, res){
+	app.put('/completeTask/:id', urlencodedParser, function (req, res){
 		console.log('in comlete task post');
 		var id = req.params.id;
     // ALTER TABLE "public"."tasks" ALTER COLUMN "completed" SET DEFAULT 'true';

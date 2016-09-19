@@ -63,7 +63,7 @@ function completeTask (){
 
 	console.log('this is', this.getAttribute('id'));
 	$.ajax({
-		type: 'POST',
+		type: 'PUT',
 		url: '/completeTask/' + id,
 		success: function(){
 			console.log('complete task successful');
@@ -71,7 +71,7 @@ function completeTask (){
 
 		},
 		error: function(){
-			console.log('post failed');
+			console.log('put failed');
 		}
 	});//end ajax post
     getTasks();

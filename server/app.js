@@ -41,7 +41,7 @@ app.get('/getTasks', function(req, res){
 				//connection done
 				done();
 				return res.json(resultArray);
-
+				res.send({success:true})
 			});//end query result on end
 		}
 	});//end pg.connect
@@ -57,6 +57,7 @@ app.get('/getTasks', function(req, res){
 				client.query('INSERT INTO tasks (task)' + 'VALUES($1) ',
 			    [req.body.task],
 					done());
+					res.send({success:true})
 			}//client query
 		});//end connect
 	});//end post
@@ -75,6 +76,7 @@ app.get('/getTasks', function(req, res){
 											[id],
 										done());
 										console.log('completed changed to true');
+										res.send({success:true})
 			}
 
 		});//end connectionString
@@ -93,6 +95,7 @@ app.get('/getTasks', function(req, res){
 				client.query('DELETE FROM tasks WHERE task_id = ($1) ',
 			           [id],
 								 done());
+								 res.send({success:true})
 
 			}
 		});//end connectionString
